@@ -14,14 +14,14 @@ class TokenService
      * Validate the given JWT.
      *
      * @param string $token
-     * @param CacheItemPoolInterface $tokenCache
+     * @param CacheItemPoolInterface $jwkCache
      * @param string $jwksUrl
      * @return Token
      * @throws InvalidTokenException
      */
     public function validateToken(
         string $token,
-        CacheItemPoolInterface $tokenCache,
+        CacheItemPoolInterface $jwkCache,
         string $jwksUrl
     ): Token {
         $token       = str_replace('Bearer ', '', $token);
@@ -34,7 +34,7 @@ class TokenService
             $jwksUrl,
             $httpClient,
             $httpFactory,
-            $tokenCache
+            $jwkCache
             // $expiresAfter int seconds to set the JWKS to expire
             // $rateLimit    true to enable rate limit of 10 RPS on lookup of invalid keys
         );

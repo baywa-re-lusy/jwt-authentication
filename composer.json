@@ -8,7 +8,7 @@
         "php": "^8.0",
         "ext-apcu": "*",
         "laminas/laminas-servicemanager": "^3.6",
-        "laminas/laminas-hydrator": "^4.5",
+        "laminas/laminas-hydrator": "^4.3",
         "laminas/laminas-cache-storage-adapter-apcu": "^2.0",
         "firebase/php-jwt": "^6.3",
         "guzzlehttp/guzzle": "^7.4",

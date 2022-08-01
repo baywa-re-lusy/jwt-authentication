@@ -6,6 +6,7 @@ class Token
 {
     protected string $sub;
     protected string $iss;
+    protected string $azp;
     protected ?string $email = null;
     protected int $exp;
 
@@ -53,6 +54,24 @@ class Token
     public function setIss(string $iss): Token
     {
         $this->iss = $iss;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAzp(): string
+    {
+        return $this->azp;
+    }
+
+    /**
+     * @param string $azp
+     * @return Token
+     */
+    public function setAzp(string $azp): Token
+    {
+        $this->azp = $azp;
         return $this;
     }
 

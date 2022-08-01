@@ -6,7 +6,7 @@ class Token
 {
     protected string $sub;
     protected string $iss;
-    protected string $email;
+    protected ?string $email = null;
     protected int $exp;
 
     /**
@@ -57,18 +57,18 @@ class Token
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      * @return Token
      */
-    public function setEmail(string $email): Token
+    public function setEmail(?string $email): Token
     {
         $this->email = $email;
         return $this;

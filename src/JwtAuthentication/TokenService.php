@@ -5,15 +5,14 @@ namespace BayWaReLusy\JwtAuthentication;
 use Firebase\JWT\CachedKeySet;
 use Firebase\JWT\JWT;
 use GuzzleHttp\Psr7\HttpFactory;
-use Laminas\Cache\Psr\CacheItemPool\CacheItemPoolDecorator;
-use Laminas\Cache\Storage\StorageInterface as Cache;
 use GuzzleHttp\Client as HttpClient;
+use Psr\Cache\CacheItemPoolInterface;
 
 class TokenService
 {
     public function validateToken(
         string $token,
-        Cache $tokenCache,
+        CacheItemPoolInterface $tokenCache,
         string $jwksUrl
     ): Token {
         $token       = str_replace('Bearer ', '', $token);
@@ -25,7 +24,7 @@ class TokenService
             $jwksUrl,
             $httpClient,
             $httpFactory,
-            new CacheItemPoolDecorator($tokenCache)
+            $tokenCache
         // $expiresAfter int seconds to set the JWKS to expire
         // $rateLimit    true to enable rate limit of 10 RPS on lookup of invalid keys
         );

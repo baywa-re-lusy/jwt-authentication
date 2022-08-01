@@ -6,7 +6,6 @@ use Laminas\Hydrator\Strategy\StrategyInterface;
 
 class ScopeStrategy implements StrategyInterface
 {
-
     public function extract($value, ?object $object = null)
     {
         throw new \Exception("The Scope info can't be extracted.");

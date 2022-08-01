@@ -9,13 +9,13 @@ class Token
     protected int $exp;
 
     /**
-     * @var array
+     * @var string[]
      * @deprecated will be removed in favor of $scope array
      */
     protected array $permissions;
 
     /**
-     * @var array
+     * @var string[]
      */
     protected array $scope;
 
@@ -74,7 +74,7 @@ class Token
     }
 
     /**
-     * @return array
+     * @return string[]
      * @deprecated will be removed in favor of getScope()
      */
     public function getPermissions(): array
@@ -83,7 +83,7 @@ class Token
     }
 
     /**
-     * @param array $permissions
+     * @param string[] $permissions
      * @return Token
      * @deprecated will be removed in favor of setScope()
      */
@@ -94,7 +94,7 @@ class Token
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getScope(): array
     {
@@ -102,7 +102,7 @@ class Token
     }
 
     /**
-     * @param array $scope
+     * @param string[] $scope
      * @return Token
      */
     public function setScope(array $scope): Token

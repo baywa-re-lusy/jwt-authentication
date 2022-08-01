@@ -10,6 +10,15 @@ use Psr\Cache\CacheItemPoolInterface;
 
 class TokenService
 {
+    /**
+     * Validate the given JWT.
+     *
+     * @param string $token
+     * @param CacheItemPoolInterface $tokenCache
+     * @param string $jwksUrl
+     * @return Token
+     * @throws InvalidTokenException
+     */
     public function validateToken(
         string $token,
         CacheItemPoolInterface $tokenCache,
@@ -20,13 +29,14 @@ class TokenService
         $httpClient  = new HttpClient();
         $httpFactory = new HttpFactory();
 
+        // Initialize the cache for the JWKs
         $keySet = new CachedKeySet(
             $jwksUrl,
             $httpClient,
             $httpFactory,
             $tokenCache
-        // $expiresAfter int seconds to set the JWKS to expire
-        // $rateLimit    true to enable rate limit of 10 RPS on lookup of invalid keys
+            // $expiresAfter int seconds to set the JWKS to expire
+            // $rateLimit    true to enable rate limit of 10 RPS on lookup of invalid keys
         );
 
         // Validate the Token

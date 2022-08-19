@@ -44,7 +44,7 @@ class TokenService
         // Validate the Token
         try {
             /** @var ArrayAccess<string, Key> $keySet */
-            $decodedToken = JWT::decode($token, JWT::getKey($keySet));
+            $decodedToken = JWT::decode($token, $keySet);
         } catch (\Throwable $e) {
             throw new InvalidTokenException($e->getMessage());
         }

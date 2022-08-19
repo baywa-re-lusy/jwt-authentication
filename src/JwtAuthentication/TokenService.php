@@ -2,8 +2,10 @@
 
 namespace BayWaReLusy\JwtAuthentication;
 
+use ArrayAccess;
 use Firebase\JWT\CachedKeySet;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use GuzzleHttp\Psr7\HttpFactory;
 use GuzzleHttp\Client as HttpClient;
 use Psr\Cache\CacheItemPoolInterface;
@@ -41,7 +43,8 @@ class TokenService
 
         // Validate the Token
         try {
-            $decodedToken = JWT::decode($token, $keySet);
+            /** @var ArrayAccess<string, Key> $keySet */
+            $decodedToken = JWT::decode($token, JWT::getKey($keySet));
         } catch (\Throwable $e) {
             throw new InvalidTokenException($e->getMessage());
         }

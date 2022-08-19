@@ -2,10 +2,8 @@
 
 namespace BayWaReLusy\JwtAuthentication;
 
-use ArrayAccess;
 use Firebase\JWT\CachedKeySet;
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 use GuzzleHttp\Psr7\HttpFactory;
 use GuzzleHttp\Client as HttpClient;
 use Psr\Cache\CacheItemPoolInterface;

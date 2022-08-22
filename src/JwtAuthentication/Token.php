@@ -104,10 +104,12 @@ class Token
 
     /**
      * @param string|null $name
+     * @return Token
      */
-    public function setName(?string $name): void
+    public function setName(?string $name): Token
     {
         $this->name = $name;
+        return $this;
     }
 
     /**

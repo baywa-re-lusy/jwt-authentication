@@ -8,7 +8,6 @@ class Token
     protected string $iss;
     protected string $azp;
     protected ?string $email = null;
-    protected ?string $name = null;
     protected int $exp;
 
     /**
@@ -101,24 +100,6 @@ class Token
     public function setEmail(?string $email): Token
     {
         $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string|null $name
-     * @return Token
-     */
-    public function setName(?string $name): Token
-    {
-        $this->name = $name;
         return $this;
     }
 

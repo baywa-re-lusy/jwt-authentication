@@ -199,7 +199,7 @@ class Token
     /**
      * @return bool
      */
-    public function isEmailVerified(): bool
+    public function getEmailVerified(): bool
     {
         return $this->emailVerified;
     }

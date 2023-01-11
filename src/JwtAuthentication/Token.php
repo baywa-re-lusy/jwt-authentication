@@ -28,6 +28,11 @@ class Token
     protected string $preferredUsername;
 
     /**
+     * @var bool
+     */
+    protected bool $emailVerified;
+
+    /**
      * @return string
      */
     public function getSub(): string
@@ -188,6 +193,24 @@ class Token
     public function setPreferredUsername(string $preferredUsername): Token
     {
         $this->preferredUsername = $preferredUsername;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmailVerified(): bool
+    {
+        return $this->emailVerified;
+    }
+
+    /**
+     * @param bool $emailVerified
+     * @return Token
+     */
+    public function setEmailVerified(bool $emailVerified): Token
+    {
+        $this->emailVerified = $emailVerified;
         return $this;
     }
 }

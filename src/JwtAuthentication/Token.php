@@ -12,12 +12,6 @@ class Token
 
     /**
      * @var string[]
-     * @deprecated will be removed in favor of $scope array
-     */
-    protected array $permissions;
-
-    /**
-     * @var string[]
      */
     protected array $scope;
 
@@ -118,26 +112,6 @@ class Token
     public function setExp(int $exp): Token
     {
         $this->exp = $exp;
-        return $this;
-    }
-
-    /**
-     * @return string[]
-     * @deprecated will be removed in favor of getScope()
-     */
-    public function getPermissions(): array
-    {
-        return $this->scope;
-    }
-
-    /**
-     * @param string[] $permissions
-     * @return Token
-     * @deprecated will be removed in favor of setScope()
-     */
-    public function setPermissions(array $permissions): Token
-    {
-        $this->scope = $permissions;
         return $this;
     }
 

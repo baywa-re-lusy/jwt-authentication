@@ -5,9 +5,8 @@
     "license": "proprietary",
     "homepage": "https://github.com/baywa-re-lusy/jwt-authentication",
     "require": {
-        "php": "^8.0",
+        "php": ">=8.1",
         "ext-apcu": "*",
-        "laminas/laminas-servicemanager": "^3.6",
         "laminas/laminas-hydrator": "^4.3",
         "laminas/laminas-cache-storage-adapter-apcu": "^2.0",
         "firebase/php-jwt": "^6.3",

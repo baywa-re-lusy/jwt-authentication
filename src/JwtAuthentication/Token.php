@@ -23,6 +23,11 @@ class Token
     protected array $scope;
 
     /**
+     * @var string
+     */
+    protected string $preferredUsername;
+
+    /**
      * @return string
      */
     public function getSub(): string
@@ -165,6 +170,24 @@ class Token
     public function setScope(array $scope): Token
     {
         $this->scope = $scope;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPreferredUsername(): string
+    {
+        return $this->preferredUsername;
+    }
+
+    /**
+     * @param string $preferredUsername
+     * @return Token
+     */
+    public function setPreferredUsername(string $preferredUsername): Token
+    {
+        $this->preferredUsername = $preferredUsername;
         return $this;
     }
 }

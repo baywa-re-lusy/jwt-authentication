@@ -6,19 +6,20 @@ class Token
 {
     protected string $sub;
     protected string $iss;
-    protected string $azp;
+    protected string $clientId;
     protected ?string $email = null;
     protected int $exp;
 
-    /**
-     * @var string[]
-     */
-    protected array $scope;
+    /** @var string[] */
+    protected array $scopes = [];
+
+    /** @var string[] */
+    protected array $roles = [];
 
     /**
      * @var string
      */
-    protected string $preferredUsername;
+    protected string $username;
 
     /**
      * @var bool
@@ -64,18 +65,18 @@ class Token
     /**
      * @return string
      */
-    public function getAzp(): string
+    public function getClientId(): string
     {
-        return $this->azp;
+        return $this->clientId;
     }
 
     /**
-     * @param string $azp
+     * @param string $clientId
      * @return Token
      */
-    public function setAzp(string $azp): Token
+    public function setClientId(string $clientId): Token
     {
-        $this->azp = $azp;
+        $this->clientId = $clientId;
         return $this;
     }
 
@@ -118,36 +119,54 @@ class Token
     /**
      * @return string[]
      */
-    public function getScope(): array
+    public function getScopes(): array
     {
-        return $this->scope;
+        return $this->scopes;
     }
 
     /**
-     * @param string[] $scope
+     * @param string[] $scopes
      * @return Token
      */
-    public function setScope(array $scope): Token
+    public function setScopes(array $scopes): Token
     {
-        $this->scope = $scope;
+        $this->scopes = $scopes;
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param string[] $roles
+     * @return Token
+     */
+    public function setRoles(array $roles): Token
+    {
+        $this->roles = $roles;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getPreferredUsername(): string
+    public function getUsername(): string
     {
-        return $this->preferredUsername;
+        return $this->username;
     }
 
     /**
-     * @param string $preferredUsername
+     * @param string $username
      * @return Token
      */
-    public function setPreferredUsername(string $preferredUsername): Token
+    public function setUsername(string $username): Token
     {
-        $this->preferredUsername = $preferredUsername;
+        $this->username = $username;
         return $this;
     }
 

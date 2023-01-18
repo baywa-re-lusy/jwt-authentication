@@ -1,6 +1,43 @@
 version: 2.1
 
+omposer_install: &composer_install
+  name: Composer install
+  command: ./composer.phar install -n
+
+composer_save_cache: &composer_save_cache
+  key: composer-cache-{{ checksum "composer.lock" }}
+  paths:
+    - vendor
+
+composer_restore_cache: &composer_restore_cache
+  keys:
+    - composer-cache-{{ checksum "composer.lock" }}
+
 jobs:
+  build:
+    docker:
+      - image: ${ACR_HOSTNAME_PD}/alpine-php81-apache-build:latest
+        auth:
+          username: ${ACR_LOGIN_PD}
+          password: ${ACR_PASSWORD_PD}
+    resource_class: large
+    working_directory: /var/www/html
+    steps:
+      - run:
+          name: Set git safe directory
+          command: git config --global --add safe.directory /var/www/html
+      - checkout
+      - restore_cache:
+          <<: *composer_restore_cache
+      - run:
+          <<: *composer_install
+      - save_cache:
+          <<: *composer_save_cache
+      - persist_to_workspace:
+          root: /var/www/html
+          paths:
+            - .
+
   phpunit:
     docker:
       - image: ${ACR_HOSTNAME_PD}/alpine-php81-apache-build:latest
@@ -58,6 +95,8 @@ workflows:
       - phpunit:
           context:
             - ACR_CREDENTIALS
+          requires:
+            - build
       - static:
           context:
             - ACR_CREDENTIALS

@@ -2,16 +2,29 @@
 
 namespace BayWaReLusy\JwtAuthentication;
 
-use BayWaReLusy\JwtAuthentication\TokenHydrator\ScopeStrategy;
-use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\AbstractHydrator;
 
-class TokenHydrator extends ClassMethodsHydrator
+class TokenHydrator extends AbstractHydrator
 {
-    public function __construct(bool $underscoreSeparatedKeys = true, bool $methodExistsCheck = false)
+    /**
+     * @param array $data
+     * @param Token $object
+     * @return Token
+     */
+    public function hydrate(array $data, object $object)
     {
-        $this->addStrategy('scope', new ScopeStrategy());
+        $object
+            ->setClientId($data['azp'])
+            ->setEmail($data['email'])
+            ->setExp($data['exp'])
+            ->setIss($data['iss'])
+            ->setSub($data['sub'])
+            ->setEmailVerified($data['email_verified'])
+            ->setUsername($data['preferred_username'])
+            ->setScopes(explode(' ', $data['scope']))
+            ->setRoles($data['realm_access']->roles);
 
-        parent::__construct($underscoreSeparatedKeys, $methodExistsCheck);
+        return $object;
     }
 
     public function extract(object $object): array

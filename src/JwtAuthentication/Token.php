@@ -6,21 +6,25 @@ class Token
 {
     protected string $sub;
     protected string $iss;
-    protected string $azp;
+    protected string $clientId;
     protected ?string $email = null;
-    protected ?string $name = null;
     protected int $exp;
 
-    /**
-     * @var string[]
-     * @deprecated will be removed in favor of $scope array
-     */
-    protected array $permissions;
+    /** @var string[] */
+    protected array $scopes = [];
+
+    /** @var string[] */
+    protected array $roles = [];
 
     /**
-     * @var string[]
+     * @var string
      */
-    protected array $scope;
+    protected string $username;
+
+    /**
+     * @var bool
+     */
+    protected bool $emailVerified;
 
     /**
      * @return string
@@ -61,18 +65,18 @@ class Token
     /**
      * @return string
      */
-    public function getAzp(): string
+    public function getClientId(): string
     {
-        return $this->azp;
+        return $this->clientId;
     }
 
     /**
-     * @param string $azp
+     * @param string $clientId
      * @return Token
      */
-    public function setAzp(string $azp): Token
+    public function setClientId(string $clientId): Token
     {
-        $this->azp = $azp;
+        $this->clientId = $clientId;
         return $this;
     }
 
@@ -91,24 +95,6 @@ class Token
     public function setEmail(?string $email): Token
     {
         $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string|null $name
-     * @return Token
-     */
-    public function setName(?string $name): Token
-    {
-        $this->name = $name;
         return $this;
     }
 
@@ -132,39 +118,73 @@ class Token
 
     /**
      * @return string[]
-     * @deprecated will be removed in favor of getScope()
      */
-    public function getPermissions(): array
+    public function getScopes(): array
     {
-        return $this->scope;
+        return $this->scopes;
     }
 
     /**
-     * @param string[] $permissions
+     * @param string[] $scopes
      * @return Token
-     * @deprecated will be removed in favor of setScope()
      */
-    public function setPermissions(array $permissions): Token
+    public function setScopes(array $scopes): Token
     {
-        $this->scope = $permissions;
+        $this->scopes = $scopes;
         return $this;
     }
 
     /**
      * @return string[]
      */
-    public function getScope(): array
+    public function getRoles(): array
     {
-        return $this->scope;
+        return $this->roles;
     }
 
     /**
-     * @param string[] $scope
+     * @param string[] $roles
      * @return Token
      */
-    public function setScope(array $scope): Token
+    public function setRoles(array $roles): Token
     {
-        $this->scope = $scope;
+        $this->roles = $roles;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param string $username
+     * @return Token
+     */
+    public function setUsername(string $username): Token
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailVerified(): bool
+    {
+        return $this->emailVerified;
+    }
+
+    /**
+     * @param bool $emailVerified
+     * @return Token
+     */
+    public function setEmailVerified(bool $emailVerified): Token
+    {
+        $this->emailVerified = $emailVerified;
         return $this;
     }
 }

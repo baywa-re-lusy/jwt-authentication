@@ -38,6 +38,32 @@ jobs:
           paths:
             - .
 
+  static:
+    docker:
+      - image: ${ACR_HOSTNAME_PD}/alpine-php81-apache-build:latest
+        auth:
+          username: ${ACR_LOGIN_PD}
+          password: ${ACR_PASSWORD_PD}
+    working_directory: /var/www/html
+    resource_class: large
+    steps:
+      - attach_workspace:
+          at: /var/www/html
+      - run:
+          name: PHPStan
+          command: |
+            mkdir -p results/PHPStan
+            php -d memory_limit=4G vendor/bin/phpstan --error-format=junit > results/PHPStan/result.xml; php -d memory_limit=4G vendor/bin/phpstan
+      - run:
+          name: PHPCS
+          command: |
+            mkdir -p results/PHPCS
+            vendor/bin/phpcs module
+      - store_test_results:
+          path: results
+      - store_artifacts:
+          path: results
+
   phpunit:
     docker:
       - image: ${ACR_HOSTNAME_PD}/alpine-php81-apache-build:latest
@@ -59,39 +85,13 @@ jobs:
       - store_artifacts:
           path: results
 
-  static:
-    docker:
-      - image: ${ACR_HOSTNAME_PD}/alpine-php81-build:latest
-        auth:
-          username: ${ACR_LOGIN_PD}
-          password: ${ACR_PASSWORD_PD}
-    resource_class: large
-    working_directory: /var/www/html
-    steps:
-      - checkout
-      - run:
-          name: Composer install
-          command: |
-            ./composer.phar update -n
-      - run:
-          name: PHPStan
-          command: |
-            mkdir -p results/PHPStan
-            php -d memory_limit=4G vendor/bin/phpstan analyze --error-format=junit > results/PHPStan/result.xml; php -d memory_limit=4G vendor/bin/phpstan analyze
-      - run:
-          name: PHPCS
-          command: |
-            mkdir -p results/PHPCS
-            vendor/bin/phpcs src
-      - store_test_results:
-          path: results
-      - store_artifacts:
-          path: results
-
 workflows:
   version: 2
   build:
     jobs:
+      - build:
+          context:
+            - ACR_CREDENTIALS
       - phpunit:
           context:
             - ACR_CREDENTIALS
@@ -100,3 +100,5 @@ workflows:
       - static:
           context:
             - ACR_CREDENTIALS
+          requires:
+            - build

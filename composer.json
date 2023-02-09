@@ -8,6 +8,7 @@
         "php": ">=8.1",
         "ext-mbstring": "*",
         "laminas/laminas-hydrator": "^4.3",
+        "laminas/laminas-permissions-acl": "^2.10",
         "firebase/php-jwt": "^6.3",
         "guzzlehttp/guzzle": "^7.4",
         "guzzlehttp/psr7": "^2.4",

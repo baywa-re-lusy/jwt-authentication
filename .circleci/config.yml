@@ -1,6 +1,6 @@
 version: 2.1
 
-omposer_install: &composer_install
+composer_install: &composer_install
   name: Composer install
   command: ./composer.phar install -n
 

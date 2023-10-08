@@ -82,4 +82,22 @@ class TokenHydratorTest extends TestCase
             $hydratedToken->getScopes()
         );
     }
+
+    public function testHydrate_ClientIdInsteadOfAzp(): void
+    {
+        $this->decodedToken['client_id'] = $this->decodedToken['azp'];
+        unset($this->decodedToken['azp']);
+
+        $hydratedToken = $this->instance->hydrate($this->decodedToken, new Token());
+
+        $this->assertEquals('client1', $hydratedToken->getClientId());
+    }
+
+    public function testHydrate_NoClientId(): void
+    {
+        unset($this->decodedToken['azp']);
+        $this->expectException(\Exception::class);
+
+        $this->instance->hydrate($this->decodedToken, new Token());
+    }
 }

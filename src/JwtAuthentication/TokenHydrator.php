@@ -13,8 +13,16 @@ class TokenHydrator extends AbstractHydrator
      */
     public function hydrate(array $data, object $object)
     {
+        if (array_key_exists('azp', $data)) {
+            $clientId = $data['azp'];
+        } elseif (array_key_exists('client_id', $data)) {
+            $clientId = $data['client_id'];
+        } else {
+            throw new \Exception("The token doesn't contain a client ID.");
+        }
+
         $object
-            ->setClientId($data['azp'])
+            ->setClientId($clientId)
             ->setEmail($data['email'])
             ->setExp($data['exp'])
             ->setIss($data['iss'])

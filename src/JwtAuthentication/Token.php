@@ -27,6 +27,11 @@ class Token
     protected bool $emailVerified;
 
     /**
+     * @var array<string, array<int>>
+     */
+    protected array $claims = [];
+
+    /**
      * @return string
      */
     public function getSub(): string
@@ -187,4 +192,15 @@ class Token
         $this->emailVerified = $emailVerified;
         return $this;
     }
+
+    public function getClaims(): array
+    {
+        return $this->claims;
+    }
+
+    public function setClaims(array $claims): void
+    {
+        $this->claims = $claims;
+    }
+
 }

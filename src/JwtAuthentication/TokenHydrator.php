@@ -20,6 +20,14 @@ class TokenHydrator extends AbstractHydrator
         } else {
             throw new \Exception("The token doesn't contain a client ID.");
         }
+        $claims = [];
+        if (array_key_exists('authorization', $data)) {
+            if (array_key_exists('permissions', $data['authorization'])) {
+                if (array_key_exists('claims', $data['authorization']['permissions'])) {
+                    $claims = $data['authorization']['permissions']['claims'];
+                }
+            }
+        }
 
         $object
             ->setClientId($clientId)
@@ -30,7 +38,8 @@ class TokenHydrator extends AbstractHydrator
             ->setEmailVerified($data['email_verified'])
             ->setUsername($data['preferred_username'])
             ->setScopes(explode(' ', $data['scope']))
-            ->setRoles($data['realm_access']->roles);
+            ->setRoles($data['realm_access']->roles)
+            ->setClaims($claims);
 
         return $object;
     }

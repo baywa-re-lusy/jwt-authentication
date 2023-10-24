@@ -22,13 +22,12 @@ class TokenHydrator extends AbstractHydrator
         }
         $claims = [];
         if (array_key_exists('authorization', $data)) {
-            if (array_key_exists('permissions', $data['authorization'])) {
-                if (array_key_exists('claims', $data['authorization']['permissions'])) {
-                    $claims = $data['authorization']['permissions']['claims'];
+            if (property_exists($data['authorization'],'permissions')) {
+                if (property_exists($data['authorization']->permissions[0], 'claims')) {
+                    $claims = (array) $data['authorization']->permissions[0]->claims;
                 }
             }
         }
-
         $object
             ->setClientId($clientId)
             ->setEmail($data['email'])

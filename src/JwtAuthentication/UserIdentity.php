@@ -126,8 +126,9 @@ class UserIdentity implements IdentityInterface
         return $this->claims;
     }
 
-    public function setClaims(array $claims): void
+    public function setClaims(array $claims): UserIdentity
     {
         $this->claims = $claims;
+        return $this;
     }
 }

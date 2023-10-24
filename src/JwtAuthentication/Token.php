@@ -2,6 +2,8 @@
 
 namespace BayWaReLusy\JwtAuthentication;
 
+use BayWaReLusy\JwtAuthentication\Token\Claim;
+
 class Token
 {
     protected string $sub;
@@ -25,6 +27,11 @@ class Token
      * @var bool
      */
     protected bool $emailVerified;
+
+    /**
+     * @var Claim[]
+     */
+    protected array $claims = [];
 
     /**
      * @return string
@@ -185,6 +192,17 @@ class Token
     public function setEmailVerified(bool $emailVerified): Token
     {
         $this->emailVerified = $emailVerified;
+        return $this;
+    }
+
+    public function getClaims(): array
+    {
+        return $this->claims;
+    }
+
+    public function setClaims(array $claims): Token
+    {
+        $this->claims = $claims;
         return $this;
     }
 }

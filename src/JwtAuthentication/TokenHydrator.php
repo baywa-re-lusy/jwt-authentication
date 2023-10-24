@@ -2,6 +2,7 @@
 
 namespace BayWaReLusy\JwtAuthentication;
 
+use BayWaReLusy\JwtAuthentication\Token\Claim;
 use Laminas\Hydrator\AbstractHydrator;
 
 class TokenHydrator extends AbstractHydrator
@@ -21,6 +22,21 @@ class TokenHydrator extends AbstractHydrator
             throw new \Exception("The token doesn't contain a client ID.");
         }
 
+        $claims = [];
+        if (array_key_exists('authorization', $data)) {
+            if (property_exists($data['authorization'], 'permissions')) {
+                if (property_exists($data['authorization']->permissions[0], 'claims')) {
+                    foreach ($data['authorization']->permissions[0]->claims as $name => $values) {
+                        $claim = new Claim();
+                        $claim
+                            ->setName($name)
+                            ->setValues($values);
+                        $claims[] = $claim;
+                    }
+                }
+            }
+        }
+
         $object
             ->setClientId($clientId)
             ->setEmail($data['email'])
@@ -30,7 +46,8 @@ class TokenHydrator extends AbstractHydrator
             ->setEmailVerified($data['email_verified'])
             ->setUsername($data['preferred_username'])
             ->setScopes(explode(' ', $data['scope']))
-            ->setRoles($data['realm_access']->roles);
+            ->setRoles($data['realm_access']->roles)
+            ->setClaims($claims);
 
         return $object;
     }

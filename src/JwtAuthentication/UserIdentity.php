@@ -2,6 +2,8 @@
 
 namespace BayWaReLusy\JwtAuthentication;
 
+use BayWaReLusy\JwtAuthentication\Token\Claim;
+
 /**
  * Class UserIdentity
  */
@@ -16,6 +18,8 @@ class UserIdentity implements IdentityInterface
     protected ?\DateTime $created;
     /** @var string[] */
     protected array $roles = [];
+    /** @var Claim[]  */
+    protected array $claims = [];
 
     /**
      * @return string
@@ -37,7 +41,8 @@ class UserIdentity implements IdentityInterface
             ->setUsername($jwtToken->getUsername())
             ->setEmailVerified($jwtToken->getEmailVerified())
             ->setEmail($jwtToken->getEmail())
-            ->setRoles($jwtToken->getRoles());
+            ->setRoles($jwtToken->getRoles())
+            ->setClaims($jwtToken->getClaims());
 
         $identity->setScopes($jwtToken->getScopes());
 
@@ -116,6 +121,24 @@ class UserIdentity implements IdentityInterface
             $this->roles[] = $role;
         }
 
+        return $this;
+    }
+
+    /**
+     * @return Claim[]
+     */
+    public function getClaims(): array
+    {
+        return $this->claims;
+    }
+
+    /**
+     * @param Claim[] $claims
+     * @return $this
+     */
+    public function setClaims(array $claims): UserIdentity
+    {
+        $this->claims = $claims;
         return $this;
     }
 }

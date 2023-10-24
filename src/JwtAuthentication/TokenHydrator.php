@@ -21,6 +21,7 @@ class TokenHydrator extends AbstractHydrator
         } else {
             throw new \Exception("The token doesn't contain a client ID.");
         }
+
         $claims = [];
         if (array_key_exists('authorization', $data)) {
             if (property_exists($data['authorization'], 'permissions')) {
@@ -35,6 +36,7 @@ class TokenHydrator extends AbstractHydrator
                 }
             }
         }
+
         $object
             ->setClientId($clientId)
             ->setEmail($data['email'])

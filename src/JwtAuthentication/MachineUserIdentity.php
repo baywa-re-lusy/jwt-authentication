@@ -49,7 +49,7 @@ class MachineUserIdentity implements IdentityInterface
     }
 
     /**
-     * @return mixed
+     * @return array<string, array>
      */
     public function getClaims(): array
     {

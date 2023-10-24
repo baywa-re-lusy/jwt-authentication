@@ -198,9 +198,9 @@ class Token
         return $this->claims;
     }
 
-    public function setClaims(array $claims): void
+    public function setClaims(array $claims): Token
     {
         $this->claims = $claims;
+        return $this;
     }
-
 }

@@ -8,6 +8,8 @@ class MachineUserIdentity implements IdentityInterface
 
     public const CONSOLE_APPLICATION = 'console';
 
+    protected array $claims;
+
     protected string $applicationId;
 
     /**
@@ -34,5 +36,23 @@ class MachineUserIdentity implements IdentityInterface
     {
         $this->applicationId = $applicationId;
         return $this;
+    }
+
+    /**
+     * @param array $claims
+     * @return MachineUserIdentity
+     */
+    public function setClaims(array $claims): MachineUserIdentity
+    {
+        $this->claims = $claims;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClaims(): array
+    {
+        return $this->claims;
     }
 }

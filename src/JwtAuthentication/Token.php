@@ -29,7 +29,7 @@ class Token
     protected bool $emailVerified;
 
     /**
-     * @var array<Claim>
+     * @var Claim[]
      */
     protected array $claims = [];
 

@@ -35,13 +35,13 @@ interface IdentityInterface extends RoleInterface
     public function setScopes(array $scopes): IdentityInterface;
 
     /**
-     * @param array<Claim> $claims
+     * @param Claim[] $claims
      * @return IdentityInterface
      */
     public function setClaims(array $claims): IdentityInterface;
 
     /**
-     * @return array<Claim>
+     * @return Claim[]
      */
     public function getClaims(): array;
 }

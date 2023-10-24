@@ -10,11 +10,8 @@ class MachineUserIdentity implements IdentityInterface
 
     public const CONSOLE_APPLICATION = 'console';
 
-    /**
-     * @var array<Claim>
-     */
+    /** @var Claim[] */
     protected array $claims = [];
-
     protected string $applicationId;
 
     /**
@@ -44,7 +41,7 @@ class MachineUserIdentity implements IdentityInterface
     }
 
     /**
-     * @param array<Claim> $claims
+     * @param Claim[] $claims
      * @return MachineUserIdentity
      */
     public function setClaims(array $claims): MachineUserIdentity
@@ -54,7 +51,7 @@ class MachineUserIdentity implements IdentityInterface
     }
 
     /**
-     * @return array<Claim>
+     * @return Claim[]
      */
     public function getClaims(): array
     {

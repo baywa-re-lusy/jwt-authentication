@@ -18,7 +18,7 @@ class UserIdentity implements IdentityInterface
     protected ?\DateTime $created;
     /** @var string[] */
     protected array $roles = [];
-    /** @var array<Claim>  */
+    /** @var Claim[]  */
     protected array $claims = [];
 
     /**
@@ -125,7 +125,7 @@ class UserIdentity implements IdentityInterface
     }
 
     /**
-     * @return array<Claim>
+     * @return Claim[]
      */
     public function getClaims(): array
     {
@@ -133,7 +133,7 @@ class UserIdentity implements IdentityInterface
     }
 
     /**
-     * @param array<Claim> $claims
+     * @param Claim[] $claims
      * @return $this
      */
     public function setClaims(array $claims): UserIdentity

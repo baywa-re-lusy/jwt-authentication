@@ -2,13 +2,18 @@
 
 namespace BayWaReLusy\JwtAuthentication;
 
+use BayWaReLusy\JwtAuthentication\Token\Claim;
+
 class MachineUserIdentity implements IdentityInterface
 {
     use IdentityTrait;
 
     public const CONSOLE_APPLICATION = 'console';
 
-    protected array $claims;
+    /**
+     * @var array<Claim>
+     */
+    protected array $claims = [];
 
     protected string $applicationId;
 
@@ -39,7 +44,7 @@ class MachineUserIdentity implements IdentityInterface
     }
 
     /**
-     * @param array $claims
+     * @param array<Claim> $claims
      * @return MachineUserIdentity
      */
     public function setClaims(array $claims): MachineUserIdentity
@@ -49,7 +54,7 @@ class MachineUserIdentity implements IdentityInterface
     }
 
     /**
-     * @return array<string, array>
+     * @return array<Claim>
      */
     public function getClaims(): array
     {

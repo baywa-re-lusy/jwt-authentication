@@ -2,6 +2,7 @@
 
 namespace BayWaReLusy\JwtAuthentication;
 
+use BayWaReLusy\JwtAuthentication\Token\Claim;
 use Laminas\Permissions\Acl\Role\RoleInterface;
 
 interface IdentityInterface extends RoleInterface
@@ -34,13 +35,13 @@ interface IdentityInterface extends RoleInterface
     public function setScopes(array $scopes): IdentityInterface;
 
     /**
-     * @param array $claims
+     * @param array<Claim> $claims
      * @return IdentityInterface
      */
     public function setClaims(array $claims): IdentityInterface;
 
     /**
-     * @return array
+     * @return array<Claim>
      */
     public function getClaims(): array;
 }

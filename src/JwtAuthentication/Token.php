@@ -2,6 +2,8 @@
 
 namespace BayWaReLusy\JwtAuthentication;
 
+use BayWaReLusy\JwtAuthentication\Token\Claim;
+
 class Token
 {
     protected string $sub;
@@ -27,7 +29,7 @@ class Token
     protected bool $emailVerified;
 
     /**
-     * @var array<string, array<int>>
+     * @var array<Claim>
      */
     protected array $claims = [];
 

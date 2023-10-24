@@ -2,6 +2,7 @@
 
 namespace BayWaReLusy\JwtAuthentication;
 
+use BayWaReLusy\JwtAuthentication\Token\Claim;
 use Laminas\Hydrator\AbstractHydrator;
 
 class TokenHydrator extends AbstractHydrator
@@ -24,7 +25,13 @@ class TokenHydrator extends AbstractHydrator
         if (array_key_exists('authorization', $data)) {
             if (property_exists($data['authorization'], 'permissions')) {
                 if (property_exists($data['authorization']->permissions[0], 'claims')) {
-                    $claims = (array) $data['authorization']->permissions[0]->claims;
+                    foreach ($data['authorization']->permissions[0]->claims as $name => $values) {
+                        $claim = new Claim();
+                        $claim
+                            ->setName($name)
+                            ->setValues($values);
+                        $claims[] = $claim;
+                    }
                 }
             }
         }

@@ -39,7 +39,7 @@ class TokenHydrator extends AbstractHydrator
 
         $object
             ->setClientId($clientId)
-            ->setEmail($data['email']??null)
+            ->setEmail($data['email'] ?? null)
             ->setExp($data['exp'])
             ->setIss($data['iss'])
             ->setSub($data['sub'])

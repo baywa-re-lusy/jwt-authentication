@@ -3,7 +3,9 @@
 namespace BayWaReLusy\JwtAuthentication;
 
 use BayWaReLusy\JwtAuthentication\Token\Claim;
+use BayWaReLusy\JwtAuthentication\Token\Client;
 use Laminas\Hydrator\AbstractHydrator;
+use BayWaReLusy\JwtAuthentication\Token\Client\Role;
 
 class TokenHydrator extends AbstractHydrator
 {
@@ -22,7 +24,7 @@ class TokenHydrator extends AbstractHydrator
             throw new \Exception("The token doesn't contain a client ID.");
         }
 
-        $claims = [];
+        // Set claims
         if (array_key_exists('authorization', $data)) {
             if (property_exists($data['authorization'], 'permissions')) {
                 if (property_exists($data['authorization']->permissions[0], 'claims')) {
@@ -31,12 +33,30 @@ class TokenHydrator extends AbstractHydrator
                         $claim
                             ->setName($name)
                             ->setValues($values);
-                        $claims[] = $claim;
+
+                        $object->addClaim($claim);
                     }
                 }
             }
         }
 
+        // Set Clients & roles
+        if (array_key_exists('resource_access', $data)) {
+            foreach (get_object_vars($data['resource_access']) as $clientName => $roles) {
+                $client = new Client();
+                $client->setName($clientName);
+
+                foreach ($roles->roles as $role) {
+                    $newRole = new Role();
+                    $newRole->setName($role);
+                    $client->addRole($newRole);
+                }
+
+                $object->addClient($client);
+            }
+        }
+
+        // Set other properties
         $object
             ->setClientId($clientId)
             ->setEmail($data['email'] ?? null)
@@ -45,9 +65,7 @@ class TokenHydrator extends AbstractHydrator
             ->setSub($data['sub'])
             ->setEmailVerified($data['email_verified'])
             ->setUsername($data['preferred_username'])
-            ->setScopes(explode(' ', $data['scope']))
-            ->setRoles($data['realm_access']->roles)
-            ->setClaims($claims);
+            ->setScopes(explode(' ', $data['scope']));
 
         return $object;
     }

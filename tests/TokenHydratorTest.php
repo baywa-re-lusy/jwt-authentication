@@ -5,6 +5,8 @@ namespace BayWaReLusy\JwtAuthentication\Test;
 use BayWaReLusy\JwtAuthentication\Token;
 use BayWaReLusy\JwtAuthentication\TokenHydrator;
 use PHPUnit\Framework\TestCase;
+use BayWaReLusy\JwtAuthentication\Token\Client;
+use BayWaReLusy\JwtAuthentication\Token\Client\Role;
 
 class TokenHydratorTest extends TestCase
 {
@@ -29,14 +31,6 @@ class TokenHydratorTest extends TestCase
                 array (
                     0 => 'https://origin1.com',
                     1 => 'https://origin2.com',
-                ),
-            'realm_access' =>
-                (object) array(
-                    'roles' =>
-                        array (
-                            0 => 'realm-role1',
-                            1 => 'realm-role2',
-                        ),
                 ),
             'resource_access' =>
                 (object) array(
@@ -76,10 +70,21 @@ class TokenHydratorTest extends TestCase
         $this->assertEquals('test@test.com', $hydratedToken->getEmail());
         $this->assertTrue($hydratedToken->getEmailVerified());
         $this->assertEquals('my.username', $hydratedToken->getUsername());
-        $this->assertEquals(['realm-role1', 'realm-role2'], $hydratedToken->getRoles());
         $this->assertEquals(
             ['resource1:read', 'resource1:write', 'resource2:read', 'resource2:write'],
             $hydratedToken->getScopes()
+        );
+        $this->assertEquals(
+            [
+                (new Client())
+                    ->setName('client1')
+                    ->addRole((new Role())->setName('role1')),
+                (new Client())
+                    ->setName('client2')
+                    ->addRole((new Role())->setName('role2'))
+                    ->addRole((new Role())->setName('role3')),
+            ],
+            $hydratedToken->getClients()
         );
     }
 

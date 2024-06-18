@@ -16,8 +16,6 @@ class UserIdentity implements IdentityInterface
     protected string $email;
     protected bool $emailVerified;
     protected ?\DateTime $created;
-    /** @var string[] */
-    protected array $roles = [];
     /** @var Claim[]  */
     protected array $claims = [];
 

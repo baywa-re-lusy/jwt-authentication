@@ -16,6 +16,9 @@ class Token
     /** @var string[] */
     protected array $scopes = [];
 
+    /** @var string[] */
+    protected array $roles = [];
+
     /** @var Client[] */
     protected array $clients = [];
 
@@ -139,6 +142,24 @@ class Token
     public function setScopes(array $scopes): Token
     {
         $this->scopes = $scopes;
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param string[] $roles
+     * @return Token
+     */
+    public function setRoles(array $roles): Token
+    {
+        $this->roles = $roles;
         return $this;
     }
 

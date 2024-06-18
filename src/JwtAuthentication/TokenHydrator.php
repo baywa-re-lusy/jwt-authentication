@@ -40,7 +40,7 @@ class TokenHydrator extends AbstractHydrator
             }
         }
 
-        // Set Clients & roles
+        // Set clients & client roles
         if (array_key_exists('resource_access', $data)) {
             foreach (get_object_vars($data['resource_access']) as $clientName => $roles) {
                 $client = new Client();
@@ -65,7 +65,8 @@ class TokenHydrator extends AbstractHydrator
             ->setSub($data['sub'])
             ->setEmailVerified($data['email_verified'])
             ->setUsername($data['preferred_username'])
-            ->setScopes(explode(' ', $data['scope']));
+            ->setScopes(explode(' ', $data['scope']))
+            ->setRoles($data['realm_access']->roles);
 
         return $object;
     }

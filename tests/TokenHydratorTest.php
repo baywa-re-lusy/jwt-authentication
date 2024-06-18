@@ -32,6 +32,14 @@ class TokenHydratorTest extends TestCase
                     0 => 'https://origin1.com',
                     1 => 'https://origin2.com',
                 ),
+            'realm_access' =>
+                (object) array(
+                    'roles' =>
+                        array (
+                            0 => 'realm-role1',
+                            1 => 'realm-role2',
+                        ),
+                ),
             'resource_access' =>
                 (object) array(
                     'client1' =>
@@ -70,6 +78,7 @@ class TokenHydratorTest extends TestCase
         $this->assertEquals('test@test.com', $hydratedToken->getEmail());
         $this->assertTrue($hydratedToken->getEmailVerified());
         $this->assertEquals('my.username', $hydratedToken->getUsername());
+        $this->assertEquals(['realm-role1', 'realm-role2'], $hydratedToken->getRoles());
         $this->assertEquals(
             ['resource1:read', 'resource1:write', 'resource2:read', 'resource2:write'],
             $hydratedToken->getScopes()

@@ -41,6 +41,7 @@ class UserIdentity implements IdentityInterface
             ->setUsername($jwtToken->getUsername())
             ->setEmailVerified($jwtToken->getEmailVerified())
             ->setEmail($jwtToken->getEmail())
+            ->setEmailVerified($jwtToken->getEmailVerified())
             ->setClaims($jwtToken->getClaims());
 
         $identity->setScopes($jwtToken->getScopes());

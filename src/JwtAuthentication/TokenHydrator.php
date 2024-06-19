@@ -65,8 +65,11 @@ class TokenHydrator extends AbstractHydrator
             ->setSub($data['sub'])
             ->setEmailVerified($data['email_verified'])
             ->setUsername($data['preferred_username'])
-            ->setScopes(explode(' ', $data['scope']))
-            ->setRoles($data['realm_access']->roles);
+            ->setScopes(explode(' ', $data['scope']));
+
+        if (array_key_exists('realm_access', $data)) {
+            $object->setRoles($data['realm_access']->roles);
+        }
 
         return $object;
     }

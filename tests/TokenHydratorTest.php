@@ -99,19 +99,54 @@ class TokenHydratorTest extends TestCase
 
     public function testHydrate_ClientIdInsteadOfAzp(): void
     {
-        $this->decodedToken['client_id'] = $this->decodedToken['azp'];
-        unset($this->decodedToken['azp']);
+        $token = $this->decodedToken;
+        $token['client_id'] = $token['azp'];
+        unset($token['azp']);
 
-        $hydratedToken = $this->instance->hydrate($this->decodedToken, new Token());
+        $hydratedToken = $this->instance->hydrate($token, new Token());
 
         $this->assertEquals('client1', $hydratedToken->getClientId());
     }
 
     public function testHydrate_NoClientId(): void
     {
-        unset($this->decodedToken['azp']);
+        $token = $this->decodedToken;
+        unset($token['azp']);
         $this->expectException(\Exception::class);
 
-        $this->instance->hydrate($this->decodedToken, new Token());
+        $this->instance->hydrate($token, new Token());
+    }
+
+    public function testHydrate_NoRealmRoles(): void
+    {
+        $token = $this->decodedToken;
+        unset($token['realm_access']);
+
+        $hydratedToken = $this->instance->hydrate($token, new Token());
+
+        $this->assertEquals('b8b43b9d-d6de-4fee-808c-5327c8e833b5', $hydratedToken->getSub());
+        $this->assertEquals('https://issuer-domain.com/realms/master', $hydratedToken->getIss());
+        $this->assertEquals('client1', $hydratedToken->getClientId());
+        $this->assertEquals(1673485065, $hydratedToken->getExp());
+        $this->assertEquals('test@test.com', $hydratedToken->getEmail());
+        $this->assertTrue($hydratedToken->getEmailVerified());
+        $this->assertEquals('my.username', $hydratedToken->getUsername());
+        $this->assertEquals([], $hydratedToken->getRoles());
+        $this->assertEquals(
+            ['resource1:read', 'resource1:write', 'resource2:read', 'resource2:write'],
+            $hydratedToken->getScopes()
+        );
+        $this->assertEquals(
+            [
+                (new Client())
+                    ->setName('client1')
+                    ->addRole((new Role())->setName('role1')),
+                (new Client())
+                    ->setName('client2')
+                    ->addRole((new Role())->setName('role2'))
+                    ->addRole((new Role())->setName('role3')),
+            ],
+            $hydratedToken->getClients()
+        );
     }
 }

@@ -16,8 +16,6 @@ class UserIdentity implements IdentityInterface
     protected string $email;
     protected bool $emailVerified;
     protected ?\DateTime $created;
-    /** @var string[] */
-    protected array $roles = [];
     /** @var Claim[]  */
     protected array $claims = [];
 
@@ -41,7 +39,7 @@ class UserIdentity implements IdentityInterface
             ->setUsername($jwtToken->getUsername())
             ->setEmailVerified($jwtToken->getEmailVerified())
             ->setEmail($jwtToken->getEmail())
-            ->setRoles($jwtToken->getRoles())
+            ->setEmailVerified($jwtToken->getEmailVerified())
             ->setClaims($jwtToken->getClaims());
 
         $identity->setScopes($jwtToken->getScopes());
@@ -101,26 +99,6 @@ class UserIdentity implements IdentityInterface
     public function setCreated(?\DateTime $created): UserIdentity
     {
         $this->created = $created;
-        return $this;
-    }
-
-    public function getRoles(): array
-    {
-        return $this->roles;
-    }
-
-    public function setRoles(array $roles): UserIdentity
-    {
-        $this->roles = $roles;
-        return $this;
-    }
-
-    public function addRole(string $role): UserIdentity
-    {
-        if (!in_array($role, $this->roles)) {
-            $this->roles[] = $role;
-        }
-
         return $this;
     }
 

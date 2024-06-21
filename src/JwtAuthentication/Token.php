@@ -3,6 +3,7 @@
 namespace BayWaReLusy\JwtAuthentication;
 
 use BayWaReLusy\JwtAuthentication\Token\Claim;
+use BayWaReLusy\JwtAuthentication\Token\Client;
 
 class Token
 {
@@ -17,6 +18,9 @@ class Token
 
     /** @var string[] */
     protected array $roles = [];
+
+    /** @var Client[] */
+    protected array $clients = [];
 
     /**
      * @var string
@@ -160,6 +164,24 @@ class Token
     }
 
     /**
+     * @return Client[]
+     */
+    public function getClients(): array
+    {
+        return $this->clients;
+    }
+
+    /**
+     * @param Client $client
+     * @return $this
+     */
+    public function addClient(Client $client): Token
+    {
+        $this->clients[] = $client;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getUsername(): string
@@ -200,9 +222,9 @@ class Token
         return $this->claims;
     }
 
-    public function setClaims(array $claims): Token
+    public function addClaim(Claim $claim): Token
     {
-        $this->claims = $claims;
+        $this->claims[] = $claim;
         return $this;
     }
 }

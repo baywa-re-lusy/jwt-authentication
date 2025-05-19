@@ -5,14 +5,14 @@
     "license": "proprietary",
     "homepage": "https://github.com/baywa-re-lusy/jwt-authentication",
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.2",
         "ext-mbstring": "*",
         "laminas/laminas-hydrator": "^4.3",
         "laminas/laminas-permissions-acl": "^2.10",
         "firebase/php-jwt": "^6.3",
         "guzzlehttp/guzzle": "^7.4",
         "guzzlehttp/psr7": "^2.4",
-        "psr/cache": "^1.0"
+        "psr/cache": "^1.0 || ^2.0 || ^3.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7",

@@ -53,6 +53,7 @@ jobs:
 
   phpunit:
     docker:
+      -
       - image: ${ACR_HOSTNAME_COMMON}/alpine-php82-apache-build:2.2.4
         auth:
           username: ${ACR_LOGIN_COMMON}

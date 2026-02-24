@@ -7,7 +7,7 @@ composer_install: &composer_install
 jobs:
   build:
     docker:
-      - image: ${ACR_HOSTNAME_PD}/alpine-php82-apache-build:latest
+      - image: ${ACR_HOSTNAME_PD}/alpine-php82-apache-build:2.2.4
         auth:
           username: ${ACR_LOGIN_PD}
           password: ${ACR_PASSWORD_PD}
@@ -27,7 +27,7 @@ jobs:
 
   static:
     docker:
-      - image: ${ACR_HOSTNAME_PD}/alpine-php82-apache-build:latest
+      - image: ${ACR_HOSTNAME_PD}/alpine-php82-apache-build:2.2.4
         auth:
           username: ${ACR_LOGIN_PD}
           password: ${ACR_PASSWORD_PD}
@@ -53,7 +53,7 @@ jobs:
 
   phpunit:
     docker:
-      - image: ${ACR_HOSTNAME_PD}/alpine-php82-apache-build:latest
+      - image: ${ACR_HOSTNAME_PD}/alpine-php82-apache-build:2.2.4
         auth:
           username: ${ACR_LOGIN_PD}
           password: ${ACR_PASSWORD_PD}

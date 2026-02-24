@@ -9,8 +9,8 @@ jobs:
     docker:
       - image: ${ACR_HOSTNAME_COMMON}/alpine-php82-apache-build:2.2.4
         auth:
-          username: ${ACR_LOGIN_PD}
-          password: ${ACR_PASSWORD_PD}
+          username: ${ACR_LOGIN_COMMON}
+          password: ${ACR_PASSWORD_COMMON}
     resource_class: large
     working_directory: /var/www/html
     steps:
@@ -29,8 +29,8 @@ jobs:
     docker:
       - image: ${ACR_HOSTNAME_COMMON}/alpine-php82-apache-build:2.2.4
         auth:
-          username: ${ACR_LOGIN_PD}
-          password: ${ACR_PASSWORD_PD}
+          username: ${ACR_LOGIN_COMMON}
+          password: ${ACR_PASSWORD_COMMON}
     working_directory: /var/www/html
     resource_class: large
     steps:
@@ -55,8 +55,8 @@ jobs:
     docker:
       - image: ${ACR_HOSTNAME_COMMON}/alpine-php82-apache-build:2.2.4
         auth:
-          username: ${ACR_LOGIN_PD}
-          password: ${ACR_PASSWORD_PD}
+          username: ${ACR_LOGIN_COMMON}
+          password: ${ACR_PASSWORD_COMMON}
     resource_class: large
     working_directory: /var/www/html
     steps:

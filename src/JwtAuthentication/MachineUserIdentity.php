@@ -32,7 +32,7 @@ class MachineUserIdentity implements IdentityInterface
     }
 
     /**
-     * @return string
+     * @return non-empty-string
      */
     public function getApplicationId(): string
     {
@@ -40,7 +40,7 @@ class MachineUserIdentity implements IdentityInterface
     }
 
     /**
-     * @param string $applicationId
+     * @param non-empty-string $applicationId
      * @return MachineUserIdentity
      */
     public function setApplicationId(string $applicationId): MachineUserIdentity
@@ -105,6 +105,9 @@ class MachineUserIdentity implements IdentityInterface
         // We do not store sensitive information
     }
 
+    /**
+     * @return non-empty-string
+     */
     public function getUserIdentifier(): string
     {
         return $this->getApplicationId();

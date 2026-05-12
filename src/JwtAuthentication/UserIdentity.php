@@ -68,11 +68,18 @@ class UserIdentity implements IdentityInterface
         return $this;
     }
 
+    /**
+     * @return non-empty-string
+     */
     public function getUsername(): string
     {
         return $this->username;
     }
 
+    /**
+     * @param non-empty-string $username
+     * @return $this
+     */
     public function setUsername(string $username): UserIdentity
     {
         $this->username = $username;
@@ -168,6 +175,9 @@ class UserIdentity implements IdentityInterface
         // We do not store sensitive information
     }
 
+    /**
+     * @return non-empty-string
+     */
     public function getUserIdentifier(): string
     {
         return $this->getUsername();

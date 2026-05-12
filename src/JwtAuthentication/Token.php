@@ -43,7 +43,7 @@ class Token
     protected array $groups = [];
 
     /**
-     * @return string
+     * @return non-empty-string
      */
     public function getSub(): string
     {
@@ -51,7 +51,7 @@ class Token
     }
 
     /**
-     * @param string $sub
+     * @param non-empty-string $sub
      * @return Token
      */
     public function setSub(string $sub): Token

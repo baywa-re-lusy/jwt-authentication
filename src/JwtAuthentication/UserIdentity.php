@@ -57,11 +57,18 @@ class UserIdentity implements IdentityInterface
         return $identity;
     }
 
+    /**
+     * @return non-empty-string
+     */
     public function getId(): string
     {
         return $this->id;
     }
 
+    /**
+     * @param non-empty-string $id
+     * @return $this
+     */
     public function setId(string $id): UserIdentity
     {
         $this->id = $id;
@@ -180,6 +187,6 @@ class UserIdentity implements IdentityInterface
      */
     public function getUserIdentifier(): string
     {
-        return $this->getUsername();
+        return $this->getId();
     }
 }

@@ -7,6 +7,9 @@ use BayWaReLusy\JwtAuthentication\Token\Client;
 
 class Token
 {
+    /**
+     * @var non-empty-string $username
+     */
     protected string $sub;
     protected string $iss;
     protected string $clientId;

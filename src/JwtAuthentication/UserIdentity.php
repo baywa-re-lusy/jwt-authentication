@@ -11,6 +11,9 @@ class UserIdentity implements IdentityInterface
 {
     use IdentityTrait;
 
+    /**
+     * @var non-empty-string $username
+     */
     protected string $id;
     /**
      * @var non-empty-string $username

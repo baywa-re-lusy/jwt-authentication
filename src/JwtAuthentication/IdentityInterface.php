@@ -4,8 +4,9 @@ namespace BayWaReLusy\JwtAuthentication;
 
 use BayWaReLusy\JwtAuthentication\Token\Claim;
 use Laminas\Permissions\Acl\Role\RoleInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-interface IdentityInterface extends RoleInterface
+interface IdentityInterface extends RoleInterface, UserInterface
 {
     /**
      * Return true/false whether the user has the given scope or not.

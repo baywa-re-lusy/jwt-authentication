@@ -12,7 +12,7 @@ class UserIdentity implements IdentityInterface
     use IdentityTrait;
 
     /**
-     * @var non-empty-string $username
+     * @var non-empty-string $id
      */
     protected string $id;
     /**

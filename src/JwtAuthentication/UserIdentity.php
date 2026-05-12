@@ -12,6 +12,9 @@ class UserIdentity implements IdentityInterface
     use IdentityTrait;
 
     protected string $id;
+    /**
+     * @var non-empty-string $username
+     */
     protected string $username;
     protected string $email;
     protected bool $emailVerified;

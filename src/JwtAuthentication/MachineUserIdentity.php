@@ -12,6 +12,9 @@ class MachineUserIdentity implements IdentityInterface
 
     /** @var Claim[] */
     protected array $claims = [];
+    /**
+     * @var non-empty-string $applicationId
+     */
     protected string $applicationId;
 
     /** @var string[] */

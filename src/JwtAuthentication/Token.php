@@ -38,6 +38,11 @@ class Token
     protected array $claims = [];
 
     /**
+     * @var string[]
+     */
+    protected array $groups = [];
+
+    /**
      * @return string
      */
     public function getSub(): string
@@ -225,6 +230,22 @@ class Token
     public function addClaim(Claim $claim): Token
     {
         $this->claims[] = $claim;
+        return $this;
+    }
+
+    public function getGroups(): array
+    {
+        return $this->groups;
+    }
+
+    public function setGroups(array $groups): void
+    {
+        $this->groups = $groups;
+    }
+
+    public function addGroup(string $group): Token
+    {
+        $this->groups[] = $group;
         return $this;
     }
 }

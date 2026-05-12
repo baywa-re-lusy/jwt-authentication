@@ -44,4 +44,15 @@ interface IdentityInterface extends RoleInterface
      * @return Claim[]
      */
     public function getClaims(): array;
+
+    /**
+     * @param string[] $claims
+     * @return IdentityInterface
+     */
+    public function setGroups(array $groups): IdentityInterface;
+
+    /**
+     * @return string[]
+     */
+    public function getGroups(): array;
 }

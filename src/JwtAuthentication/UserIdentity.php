@@ -19,6 +19,9 @@ class UserIdentity implements IdentityInterface
     /** @var Claim[]  */
     protected array $claims = [];
 
+    /** @var string[] */
+    protected array $groups = [];
+
     /**
      * @return string
      */
@@ -40,7 +43,8 @@ class UserIdentity implements IdentityInterface
             ->setEmailVerified($jwtToken->getEmailVerified())
             ->setEmail($jwtToken->getEmail())
             ->setEmailVerified($jwtToken->getEmailVerified())
-            ->setClaims($jwtToken->getClaims());
+            ->setClaims($jwtToken->getClaims())
+            ->setGroups($jwtToken->getGroups());
 
         $identity->setScopes($jwtToken->getScopes());
 
@@ -118,5 +122,23 @@ class UserIdentity implements IdentityInterface
     {
         $this->claims = $claims;
         return $this;
+    }
+
+    /**
+     * @param array<string> $groups
+     * @return UserIdentity
+     */
+    public function setGroups(array $groups): UserIdentity
+    {
+        $this->groups = $groups;
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getGroups(): array
+    {
+        return $this->getGroups();
     }
 }

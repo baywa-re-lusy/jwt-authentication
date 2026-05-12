@@ -14,6 +14,9 @@ class MachineUserIdentity implements IdentityInterface
     protected array $claims = [];
     protected string $applicationId;
 
+    /** @var string[] */
+    protected array $groups = [];
+
     /**
      * @return string
      */
@@ -56,5 +59,23 @@ class MachineUserIdentity implements IdentityInterface
     public function getClaims(): array
     {
         return $this->claims;
+    }
+
+    /**
+     * @param array<string> $groups
+     * @return UserIdentity
+     */
+    public function setGroups(array $groups): MachineUserIdentity
+    {
+        $this->groups = $groups;
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getGroups(): array
+    {
+        return $this->getGroups();
     }
 }

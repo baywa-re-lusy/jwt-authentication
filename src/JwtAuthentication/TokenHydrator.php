@@ -71,6 +71,13 @@ class TokenHydrator extends AbstractHydrator
             $object->setRoles($data['realm_access']->roles);
         }
 
+        // Set groups
+        if (array_key_exists('groups', $data)) {
+            foreach ($data['groups'] as $group) {
+                $object->addGroup($group);
+            }
+        }
+
         return $object;
     }
 

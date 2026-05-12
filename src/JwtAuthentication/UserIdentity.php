@@ -15,9 +15,6 @@ class UserIdentity implements IdentityInterface
      * @var non-empty-string $id
      */
     protected string $id;
-    /**
-     * @var non-empty-string $username
-     */
     protected string $username;
     protected string $email;
     protected bool $emailVerified;
@@ -79,7 +76,7 @@ class UserIdentity implements IdentityInterface
     }
 
     /**
-     * @return non-empty-string
+     * @return string
      */
     public function getUsername(): string
     {
@@ -87,7 +84,7 @@ class UserIdentity implements IdentityInterface
     }
 
     /**
-     * @param non-empty-string $username
+     * @param string $username
      * @return $this
      */
     public function setUsername(string $username): UserIdentity

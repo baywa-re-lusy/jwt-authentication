@@ -25,9 +25,6 @@ class Token
     /** @var Client[] */
     protected array $clients = [];
 
-    /**
-     * @var non-empty-string
-     */
     protected string $username;
 
     /**
@@ -190,7 +187,7 @@ class Token
     }
 
     /**
-     * @return non-empty-string
+     * @return string
      */
     public function getUsername(): string
     {
@@ -198,7 +195,7 @@ class Token
     }
 
     /**
-     * @param non-empty-string $username
+     * @param string $username
      * @return Token
      */
     public function setUsername(string $username): Token

@@ -55,4 +55,13 @@ interface IdentityInterface extends RoleInterface
      * @return string[]
      */
     public function getGroups(): array;
+
+    /**
+     * @return string[]
+     */
+    public function getRoles(): array;
+
+    public function eraseCredentials(): void;
+
+    public function getUserIdentifier(): string;
 }

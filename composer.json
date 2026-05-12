@@ -9,6 +9,7 @@
         "ext-mbstring": "*",
         "laminas/laminas-hydrator": "^4.3",
         "laminas/laminas-permissions-acl": "^2.10",
+        "symfony/security-core": "^7.4",
         "firebase/php-jwt": "^7.0",
         "guzzlehttp/guzzle": "^7.4",
         "guzzlehttp/psr7": "^2.4",

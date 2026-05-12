@@ -17,6 +17,9 @@ class MachineUserIdentity implements IdentityInterface
     /** @var string[] */
     protected array $groups = [];
 
+    /** @var string[] */
+    protected array $roles = [];
+
     /**
      * @return string
      */
@@ -77,5 +80,30 @@ class MachineUserIdentity implements IdentityInterface
     public function getGroups(): array
     {
         return $this->getGroups();
+    }
+
+    /**
+     * @param string[] $roles
+     * @return $this
+     */
+    public function setRoles(array $roles): MachineUserIdentity
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // We do not store sensitive information
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->getApplicationId();
     }
 }

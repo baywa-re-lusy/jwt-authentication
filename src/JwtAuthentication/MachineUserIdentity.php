@@ -63,7 +63,7 @@ class MachineUserIdentity implements IdentityInterface
 
     /**
      * @param array<string> $groups
-     * @return UserIdentity
+     * @return MachineUserIdentity
      */
     public function setGroups(array $groups): MachineUserIdentity
     {

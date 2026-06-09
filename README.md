@@ -26,7 +26,10 @@ public function onAuthentication(MvcAuthEvent $e): IdentityInterface
     $jwksUrl                      = ...; // URL from where to get JWKs
     $cache                        = new CacheItemPoolDecorator($laminasCacheStorageInterface);
     
-    $tokenService = new TokenService();
+    $tokenService = new TokenService(
+        <PSR-compliant HTTP Client>,
+        <PSR-compliant HTTP RequestFactory>
+    );
     
     try {
         $token = $tokenService->validateToken($jwt, $cache, $jwksUrl);

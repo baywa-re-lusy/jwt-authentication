@@ -3,6 +3,7 @@
 namespace BayWaReLusy\JwtAuthentication;
 
 use BayWaReLusy\JwtAuthentication\Token\Claim;
+use Deprecated;
 
 class MachineUserIdentity implements IdentityInterface
 {
@@ -100,6 +101,7 @@ class MachineUserIdentity implements IdentityInterface
         return $this->roles;
     }
 
+    #[Deprecated]
     public function eraseCredentials(): void
     {
         // We do not store sensitive information

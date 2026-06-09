@@ -4,12 +4,18 @@ namespace BayWaReLusy\JwtAuthentication;
 
 use Firebase\JWT\CachedKeySet;
 use Firebase\JWT\JWT;
-use GuzzleHttp\Psr7\HttpFactory;
-use GuzzleHttp\Client as HttpClient;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 
 class TokenService
 {
+    public function __construct(
+        private readonly ClientInterface $httpClient,
+        private readonly RequestFactoryInterface $httpFactory,
+    ) {
+    }
+
     /**
      * Validate the given JWT.
      *
@@ -24,22 +30,16 @@ class TokenService
         CacheItemPoolInterface $jwkCache,
         string $jwksUrl
     ): Token {
-        $token       = str_replace('Bearer ', '', $token);
-        $hydrator    = new TokenHydrator();
-        $httpClient  = new HttpClient();
-        $httpFactory = new HttpFactory();
+        $token    = str_replace('Bearer ', '', $token);
+        $hydrator = new TokenHydrator();
 
-        // Initialize the cache for the JWKs
         $keySet = new CachedKeySet(
             $jwksUrl,
-            $httpClient,
-            $httpFactory,
+            $this->httpClient,
+            $this->httpFactory,
             $jwkCache
-            // $expiresAfter int seconds to set the JWKS to expire
-            // $rateLimit    true to enable rate limit of 10 RPS on lookup of invalid keys
         );
 
-        // Validate the Token
         try {
             $decodedToken = JWT::decode($token, $keySet);
         } catch (\Throwable $e) {

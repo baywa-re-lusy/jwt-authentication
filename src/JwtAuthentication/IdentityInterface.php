@@ -3,6 +3,7 @@
 namespace BayWaReLusy\JwtAuthentication;
 
 use BayWaReLusy\JwtAuthentication\Token\Claim;
+use Deprecated;
 use Laminas\Permissions\Acl\Role\RoleInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -62,6 +63,7 @@ interface IdentityInterface extends RoleInterface, UserInterface
      */
     public function getRoles(): array;
 
+    #[Deprecated]
     public function eraseCredentials(): void;
 
     public function getUserIdentifier(): string;

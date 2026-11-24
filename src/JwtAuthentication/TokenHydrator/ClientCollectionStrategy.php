@@ -24,6 +24,11 @@ class ClientCollectionStrategy implements StrategyInterface
         return $result;
     }
 
+    /**
+     * @param $value
+     * @param array<mixed>|null $data
+     * @return Client[]|null
+     */
     public function hydrate($value, ?array $data)
     {
         if (is_null($value)) {

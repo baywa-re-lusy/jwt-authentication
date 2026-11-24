@@ -10,7 +10,7 @@ use BayWaReLusy\JwtAuthentication\Token\Client\Role;
 class TokenHydrator extends AbstractHydrator
 {
     /**
-     * @param array $data
+     * @param array<mixed> $data
      * @param Token $object
      * @return Token
      */

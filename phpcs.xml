@@ -9,6 +9,8 @@
     <arg name="report-full"/>
     <arg name="report-junit" value="./results/PHPCS/result.xml"/>
 
+    <file>src</file>
+
     <exclude-pattern>*.config.php</exclude-pattern>
 
     <!-- inherit rules from: -->

@@ -11,6 +11,12 @@ class ScopeStrategy implements StrategyInterface
         throw new \Exception("The Scope info can't be extracted.");
     }
 
+    /**
+     * @param $value
+     * @param array<mixed>|null $data
+     * @return mixed|string[]
+     * @throws \Exception
+     */
     public function hydrate($value, ?array $data)
     {
         if (!is_string($value)) {

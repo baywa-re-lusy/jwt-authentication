@@ -222,6 +222,9 @@ class Token
         return $this;
     }
 
+    /**
+     * @return Claim[]
+     */
     public function getClaims(): array
     {
         return $this->claims;
@@ -233,11 +236,18 @@ class Token
         return $this;
     }
 
+    /**
+     * @return string[]
+     */
     public function getGroups(): array
     {
         return $this->groups;
     }
 
+    /**
+     * @param string[] $groups
+     * @return void
+     */
     public function setGroups(array $groups): void
     {
         $this->groups = $groups;

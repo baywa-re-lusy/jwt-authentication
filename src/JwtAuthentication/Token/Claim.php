@@ -10,7 +10,7 @@ class Claim
     private string $name;
 
     /**
-     * @var array
+     * @var string[]
      */
     private array $values = [];
 
@@ -33,7 +33,7 @@ class Claim
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getValues(): array
     {
@@ -41,7 +41,7 @@ class Claim
     }
 
     /**
-     * @param array $values
+     * @param string[] $values
      * @return $this
      */
     public function setValues(array $values): Claim
